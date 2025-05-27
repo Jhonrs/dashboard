@@ -9,16 +9,15 @@ interface Props {
 // Solo se va a generar en el build time
 
 export async function generateStaticParams() {
+  const data: PokemonsResponse = await fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=151`
+  ).then((res) => res.json());
 
-    const data: PokemonsResponse = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=151`
-      ).then((res) => res.json());
-
-  const static151Pokemons = data.results.map( pokemon => ({
+  const static151Pokemons = data.results.map((pokemon) => ({
     name: pokemon.name,
   }));
 
-  return static151Pokemons.map((name) => ({
+  return static151Pokemons.map(({ name }) => ({
     name: name,
   }));
 }
@@ -33,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Página del pokemon ${name}`,
     };
   } catch (error) {
+    console.error(error);
     return {
       title: "Pokemon no encontrado",
       description: "Pokemon no encontrado",
@@ -51,6 +51,7 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
 
     return pokemon;
   } catch (error) {
+    console.error(error);
     notFound();
   }
 };

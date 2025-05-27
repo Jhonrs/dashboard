@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Página del pokemon ${name}`,
     };
   } catch (error) {
+    console.error(error);
     return {
       title: "Pokemon no encontrado",
       description: "Pokemon no encontrado",
@@ -46,6 +47,7 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
 
     return pokemon;
   } catch (error) {
+    console.error(error);
     notFound();
   }
 };

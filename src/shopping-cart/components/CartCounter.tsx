@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/index";
 import {
   addOne,
   initCounterState,
   substractOne,
 } from "../../store/counter/counterSlice";
-import { count } from "console";
 
 interface Props {
   value?: number;
